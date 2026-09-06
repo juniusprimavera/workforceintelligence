@@ -5,6 +5,10 @@ import router from "./routes";
 import { logger } from "./lib/logger";
 
 const app: Express = express();
+const allowedOrigins = new Set([
+  "https://juniusprimavera.com",
+  "https://www.juniusprimavera.com",
+]);
 
 app.use(
   pinoHttp({
@@ -25,7 +29,18 @@ app.use(
     },
   }),
 );
-app.use(cors());
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.has(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Origin is not allowed by CORS"));
+    },
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

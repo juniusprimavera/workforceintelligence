@@ -1,0 +1,53 @@
+name: Deploy Workforce Intelligence
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-workforce-intelligence
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build frontend for portfolio subpath
+        env:
+          PORT: 4173
+          VITE_API_BASE_URL: https://document-review-aid.replit.app
+        run: pnpm --filter @workspace/workforce-intelligence run build
+
+      - name: Upload only Workforce Intelligence
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          local-dir: artifacts/workforce-intelligence/dist/public/
+          server-dir: public_html/workforceintelligence/
+          dangerous-clean-slate: false

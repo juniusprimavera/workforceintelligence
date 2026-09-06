@@ -19,7 +19,10 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-const basePath = process.env.BASE_PATH;
+const basePath =
+  process.env.NODE_ENV === 'production'
+    ? '/workforceintelligence/'
+    : process.env.BASE_PATH;
 
 if (!basePath) {
   throw new Error(
