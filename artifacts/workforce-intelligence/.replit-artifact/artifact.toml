@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/workforce-intelligence/"
+title = "Workforce Intelligence Platform"
+version = "1.0.0"
+id = "artifacts/workforce-intelligence"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/workforce-intelligence/" ]
+localPort = 24427
+
+[services.development]
+run = "pnpm --filter @workspace/workforce-intelligence run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/workforce-intelligence", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/workforce-intelligence/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24427"
+BASE_PATH = "/workforce-intelligence/"

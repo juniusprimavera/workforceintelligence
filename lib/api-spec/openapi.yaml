@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: workforce-validation
+    description: Local-only Workforce Intelligence validation decisions
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /workforce-validations:
+    get:
+      operationId: listWorkforceValidations
+      tags: [workforce-validation]
+      summary: List local validation decisions
+      description: Returns decisions stored only in Workforce Intelligence. It never reads from or writes to source applications.
+      responses:
+        "200":
+          description: Local validation decisions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WorkforceValidationCase"
+  /workforce-validations/{employeeId}:
+    put:
+      operationId: saveWorkforceValidation
+      tags: [workforce-validation]
+      summary: Save a local field-resolution decision
+      description: Saves an analytical resolution in Workforce Intelligence only. Source-system records are never updated.
+      parameters:
+        - name: employeeId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkforceValidationInput"
+      responses:
+        "200":
+          description: Saved local validation decision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkforceValidationCase"
+        "400":
+          description: Invalid decision payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    ValidationDecisionStatus:
+      type: string
+      enum: [confirmed, held]
+    ValidationSource:
+      type: string
+      enum: [hris, ats]
+    FieldResolution:
+      type: object
+      required: [fieldKey, selectedSource, resolvedValue, reason, sourceValues]
+      properties:
+        fieldKey:
+          type: string
+          minLength: 1
+        selectedSource:
+          $ref: "#/components/schemas/ValidationSource"
+        resolvedValue:
+          type: string
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 500
+        sourceValues:
+          type: object
+          additionalProperties:
+            type: ["string", "null"]
+    WorkforceValidationInput:
+      type: object
+      required: [status, decisions]
+      properties:
+        status:
+          $ref: "#/components/schemas/ValidationDecisionStatus"
+        decisionNote:
+          type: ["string", "null"]
+          maxLength: 500
+        decisions:
+          type: array
+          maxItems: 20
+          items:
+            $ref: "#/components/schemas/FieldResolution"
+    WorkforceValidationCase:
+      type: object
+      required: [employeeId, status, decisions, reviewedAt]
+      properties:
+        employeeId:
+          type: string
+        status:
+          type: string
+          enum: [pending, confirmed, held]
+        decisionNote:
+          type: ["string", "null"]
+        reviewedAt:
+          type: ["string", "null"]
+          format: date-time
+        decisions:
+          type: array
+          items:
+            $ref: "#/components/schemas/FieldResolution"
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+

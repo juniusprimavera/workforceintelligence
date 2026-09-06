@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; color: #1a1a1a; margin: 2cm; }
+  h1 { font-size: 20pt; color: #0f2942; border-bottom: 3px solid #0f2942; padding-bottom: 8px; margin-top: 0; }
+  h2 { font-size: 14pt; color: #0f2942; margin-top: 24px; margin-bottom: 8px; }
+  h3 { font-size: 12pt; color: #1a6b8a; margin-top: 16px; }
+  .subtitle { font-size: 12pt; color: #666; margin-bottom: 24px; }
+  .meta { font-size: 9pt; color: #999; margin-bottom: 32px; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+  th { background: #0f2942; color: white; padding: 8px 10px; text-align: left; }
+  td { padding: 7px 10px; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+  tr:nth-child(even) td { background: #f7f9fc; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 9pt; font-weight: bold; }
+  .badge-red { background: #fff0f0; color: #c0392b; border: 1px solid #e8a0a0; }
+  .badge-green { background: #f0fff4; color: #1a7a4a; border: 1px solid #90cca8; }
+  .badge-blue { background: #f0f8ff; color: #1a5276; border: 1px solid #a0bce0; }
+  .badge-amber { background: #fffbf0; color: #b7770d; border: 1px solid #e0cc80; }
+  .stat-row { display: flex; gap: 16px; margin: 16px 0; }
+  .stat-box { flex: 1; border: 1px solid #e0e8f0; border-radius: 4px; padding: 12px 16px; text-align: center; }
+  .stat-number { font-size: 24pt; font-weight: bold; color: #0f2942; display: block; }
+  .stat-label { font-size: 9pt; color: #666; }
+  blockquote { border-left: 4px solid #1a6b8a; padding: 12px 16px; margin: 16px 0; background: #f5f9fc; font-style: italic; color: #333; }
+  .section-number { font-size: 10pt; font-weight: bold; color: #1a6b8a; text-transform: uppercase; letter-spacing: 1px; }
+  .divider { border: none; border-top: 1px solid #e0e8f0; margin: 24px 0; }
+  p { line-height: 1.6; margin: 8px 0; }
+  ul { margin: 8px 0; padding-left: 20px; line-height: 1.8; }
+  .employee-card { border: 1px solid #e0e8f0; border-radius: 4px; padding: 10px 14px; margin: 8px 0; }
+  .employee-name { font-weight: bold; color: #0f2942; }
+  .employee-id { font-size: 9pt; color: #888; }
+  .employee-label { display: inline-block; margin-left: 8px; padding: 1px 6px; border-radius: 2px; font-size: 8.5pt; font-weight: bold; }
+  .label-red { background: #ffe0e0; color: #b00; }
+  .label-amber { background: #fff3d0; color: #8b6000; }
+  .consequence { font-size: 10pt; color: #555; margin-top: 4px; }
+  .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<h1>The Comparison:<br>Dataset A (Raw) vs. Dataset B (Contextualized)</h1>
+<p class="subtitle">Case Study Analysis — Medika Nusantara Workforce Intelligence Platform</p>
+<p class="meta">Rakamin Product Consultant Case Study 2026 &nbsp;|&nbsp; Prepared by: Junius Primavera &nbsp;|&nbsp; Date: July 2026</p>
+
+<hr class="divider">
+
+<p>This document addresses the four core comparison questions from the case study brief, using real data from the 200-employee synthetic dataset.</p>
+
+<hr class="divider">
+
+<!-- SECTION 01 -->
+<p class="section-number">Section 01</p>
+<h2>Prediction Quality: Dataset A vs. Dataset B</h2>
+<p>The table below compares what the AI system can predict for each employee capability — before and after the data layer is applied.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Capability Assessed</th>
+      <th>Dataset A — Raw</th>
+      <th>Dataset B — Contextualized</th>
+      <th>Improvement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Skill Gap Identification</strong></td>
+      <td>44% of employees have missing or empty skill data → AI cannot assess</td>
+      <td>100% assessable; gaps flagged for 102 employees (critical) + 88 (moderate)</td>
+      <td>+100% coverage</td>
+    </tr>
+    <tr>
+      <td><strong>Readiness Score</strong></td>
+      <td>Scores cannot be generated reliably; date conflicts distort tenure signals</td>
+      <td>Avg readiness 78%; distributed across Low/Med/High with confidence weighting</td>
+      <td>From 0% to 78% avg</td>
+    </tr>
+    <tr>
+      <td><strong>Identity Confidence</strong></td>
+      <td>38 employees have name variants; 36 have duplicate flags → unreliable matching</td>
+      <td>Identity resolved for all 200: 107 exact, 38 fuzzy, 33 rule-based, 22 single-source</td>
+      <td>0% → 100% resolved</td>
+    </tr>
+    <tr>
+      <td><strong>Performance Trend Prediction</strong></td>
+      <td>39 date conflicts corrupt tenure; 31 employees have no ATS record</td>
+      <td>Trend available for 154 employees; 46 flagged as insufficient_data (human review)</td>
+      <td>0% → 77% trend coverage</td>
+    </tr>
+    <tr>
+      <td><strong>Learning Recommendation</strong></td>
+      <td>Not possible — no skill baseline to measure gaps against</td>
+      <td>153 employees have at least 1 recommended learning path</td>
+      <td>0 → 153 employees served</td>
+    </tr>
+    <tr>
+      <td><strong>Promotion/Succession Readiness</strong></td>
+      <td>Cannot assess — identity conflicts mean records may be doubled or missing</td>
+      <td>L3–L4 employees assessed with confidence; 64 flagged urgent for human review</td>
+      <td>0% → 77% of senior roles covered</td>
+    </tr>
+    <tr>
+      <td><strong>Retention Risk Scoring</strong></td>
+      <td>Cannot distinguish genuine skill gaps from missing data artifacts</td>
+      <td>101 employees require review; 64 urgent cases surfaced with explicit reasons</td>
+      <td>0% → 50.5% at-risk identified</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Summary:</strong> Without the data layer (Dataset A), the AI system produces <em>zero actionable predictions</em> for nearly half the workforce. With it (Dataset B), every employee has a confidence-weighted profile the system can reason about.</p>
+
+<hr class="divider">
+
+<!-- SECTION 02 -->
+<p class="section-number">Section 02</p>
+<h2>Confidence Floor: Where Dataset A Breaks Down</h2>
+<p>The three main data quality failure modes in Dataset A, and their compound effect:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Failure Mode</th>
+      <th>Count</th>
+      <th>% of 200</th>
+      <th>AI Consequence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Missing skill data</strong></td>
+      <td>88 employees</td>
+      <td>44%</td>
+      <td>Skill gap model cannot run; employee invisible to recommendation engine</td>
+    </tr>
+    <tr>
+      <td><strong>Conflicting hire dates</strong></td>
+      <td>39 employees</td>
+      <td>19.5%</td>
+      <td>Tenure signal corrupted; seniority-based predictions systematically wrong</td>
+    </tr>
+    <tr>
+      <td><strong>No ATS record</strong></td>
+      <td>31 employees</td>
+      <td>15.5%</td>
+      <td>No application history; AI cannot verify role progression or interview signals</td>
+    </tr>
+    <tr>
+      <td><strong>Name variants across systems</strong></td>
+      <td>38 employees</td>
+      <td>19%</td>
+      <td>Records may be split or double-counted; AI works on a ghost employee</td>
+    </tr>
+    <tr>
+      <td><strong>Duplicate flags</strong></td>
+      <td>36 employees</td>
+      <td>18%</td>
+      <td>Same employee counted twice inflates headcount; predictions run on phantom record</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Effective AI Confidence Floor (Dataset A):</strong> When compounding these failure modes, only 34 out of 200 employees (17%) have clean, complete records that allow reliable AI prediction without any intervention.</p>
+<p><strong>Dataset B resolves this:</strong> Data confidence reaches "high" for 114 employees (57%), "medium" for 73 (36.5%), and "low" is isolated to 2 employees flagged for immediate manual review.</p>
+
+<hr class="divider">
+
+<!-- SECTION 03A -->
+<p class="section-number">Section 03A</p>
+<h2>Wrongly Flagged Employees</h2>
+<p>These employees would receive incorrect predictions from Dataset A — either being scored as high-risk, low-readiness, or up for review — when they should not be.</p>
+
+<div class="employee-card">
+  <div><span class="employee-name">Taufik Suharto</span> <span class="employee-id">EMP-2030 / MN-10030</span> <span class="employee-label label-red">DOUBLE-COUNTED</span></div>
+  <div class="consequence"><strong>Issue:</strong> Name variant ("Taufiki") across systems + duplicate flag. Dataset A sees two partial records.</div>
+  <div class="consequence"><strong>AI consequence:</strong> Readiness scored on an incomplete phantom record instead of his actual 3-year tenure with 3 confirmed skills.</div>
+</div>
+
+<div class="employee-card">
+  <div><span class="employee-name">Fuad Alamsyah</span> <span class="employee-id">EMP-2004 / MN-10004</span> <span class="employee-label label-amber">TENURE SKEWED</span></div>
+  <div class="consequence"><strong>Issue:</strong> Conflicting hire dates (HRIS: Nov 16, ATS: Nov 20, 2019). 4-day discrepancy triggers date conflict flag.</div>
+  <div class="consequence"><strong>AI consequence:</strong> System either uses wrong tenure baseline or discards the record entirely. Employee has valid Inventory + GDP skills that become invisible.</div>
+</div>
+
+<div class="employee-card">
+  <div><span class="employee-name">Chandra Basuki</span> <span class="employee-id">EMP-2096 / MN-10096</span> <span class="employee-label label-red">SPLIT IDENTITY</span></div>
+  <div class="consequence"><strong>Issue:</strong> Name variant ("Chandrai") + duplicate flag + conflicting dates — 3 simultaneous issues. Branch Manager L4.</div>
+  <div class="consequence"><strong>AI consequence:</strong> Senior leadership role with no reliable profile. Succession planning data for this branch is structurally broken in Dataset A.</div>
+</div>
+
+<div class="employee-card">
+  <div><span class="employee-name">Panji Kasim</span> <span class="employee-id">EMP-2016 / MN-10016</span> <span class="employee-label label-red">DUPLICATE FLAG</span></div>
+  <div class="consequence"><strong>Issue:</strong> Marked potential duplicate + missing skill data. Dataset A has no basis for an assessment.</div>
+  <div class="consequence"><strong>AI consequence:</strong> Flagged as incomplete AND duplicate — two contradictory signals. Model may treat as two employees, neither with enough data.</div>
+</div>
+
+<div class="employee-card">
+  <div><span class="employee-name">Vina Salim</span> <span class="employee-id">EMP-2023 / MN-10023</span> <span class="employee-label label-amber">FALSE NEGATIVE RISK</span></div>
+  <div class="consequence"><strong>Issue:</strong> Missing skill data + conflicting dates + duplicate flag on an L3 Sales employee (Sr. Rep).</div>
+  <div class="consequence"><strong>AI consequence:</strong> Would be ranked as low-readiness by default (no skills on record). Dataset B scores her at 75% readiness with 5 inferred skills.</div>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 03B -->
+<p class="section-number">Section 03B</p>
+<h2>Missed Entirely: Employees Invisible to Dataset A</h2>
+<p>These employees exist in HRIS but have no ATS record, making them structurally invisible to the full AI pipeline in Dataset A.</p>
+
+<div class="employee-card">
+  <div><span class="employee-name">Damar Permata</span> <span class="employee-id">EMP-2003 / MN-10003</span> <span class="employee-label label-red">NO ATS RECORD</span></div>
+  <div class="consequence"><strong>Status:</strong> HRIS only. No email, no ATS profile, no phone. Logistics Coordinator with 6 years tenure.</div>
+  <div class="consequence"><strong>Missed insight:</strong> Dataset B infers 1 skill, surfaces 2 critical gaps, and recommends 2 learning paths. None of this is possible from Dataset A.</div>
+</div>
+
+<div class="employee-card">
+  <div><span class="employee-name">Agus Harahap</span> <span class="employee-id">EMP-2017 / MN-10017</span> <span class="employee-label label-red">NO ATS RECORD</span></div>
+  <div class="consequence"><strong>Status:</strong> HRIS + LMS only. Customer Service staff with 4 years tenure, performance score 2.8 — lowest in the dataset.</div>
+  <div class="consequence"><strong>Missed insight:</strong> This employee is a retention risk (low score, no ATS, missing skills) that Dataset A cannot surface. Dataset B flags 3 critical gaps.</div>
+</div>
+
+<div class="employee-card">
+  <div><span class="employee-name">Muhammad Cahyadi</span> <span class="employee-id">EMP-2036 / MN-10036</span> <span class="employee-label label-red">NO ATS · DUPLICATE</span></div>
+  <div class="consequence"><strong>Status:</strong> No ATS record + duplicate flag + missing email. Warehouse Operator.</div>
+  <div class="consequence"><strong>Missed insight:</strong> The duplicate flag means Dataset A has this person twice (neither complete). Dataset B resolves to single record, scores readiness at 67%.</div>
+</div>
+
+<div class="employee-card">
+  <div><span class="employee-name">Teguh Effendi</span> <span class="employee-id">EMP-2088 / MN-10088</span> <span class="employee-label label-amber">INVISIBLE PROFILE</span></div>
+  <div class="consequence"><strong>Status:</strong> No ATS, no phone, missing skill data. Sales Senior (L3) with 4-year tenure.</div>
+  <div class="consequence"><strong>Missed insight:</strong> An L3 Sales role with declining performance trend (3.7 → declining) and 2 critical skill gaps. Completely undetectable from Dataset A.</div>
+</div>
+
+<div class="employee-card">
+  <div><span class="employee-name">Nabila Fatoni</span> <span class="employee-id">EMP-2014 / MN-10014</span> <span class="employee-label label-amber">HIDDEN GAP RISK</span></div>
+  <div class="consequence"><strong>Status:</strong> No ATS record, conflicting hire dates. QC Staff with 9-year tenure and declining performance.</div>
+  <div class="consequence"><strong>Missed insight:</strong> Despite having 4 listed skills in Dataset A, the lack of ATS record means the AI cannot verify tenure or progression. Dataset B flags her as normal review priority with confidence 0.81.</div>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 04 -->
+<p class="section-number">Section 04</p>
+<h2>The Core Argument: Why the Data Layer Changes Everything</h2>
+
+<p>The question is not whether Dataset B has better data. It obviously does. The real question is: <em>what does that actually change for the business?</em></p>
+
+<p>Here is what changes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Without the Data Layer (Dataset A)</th>
+      <th>With the Data Layer (Dataset B)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AI produces predictions for 17% of employees reliably</td>
+      <td>AI produces confidence-weighted predictions for 100% of employees</td>
+    </tr>
+    <tr>
+      <td>Missing data is silent — HR doesn't know what they don't know</td>
+      <td>Missing data is surfaced explicitly — 101 employees flagged for human review with reasons</td>
+    </tr>
+    <tr>
+      <td>Duplicate employees inflate headcount, distort department analytics</td>
+      <td>All 200 identities resolved; analytics reflect actual workforce composition</td>
+    </tr>
+    <tr>
+      <td>Learning recommendations: 0 (no skill baseline to measure against)</td>
+      <td>Learning recommendations: 153 employees, prioritized by gap severity</td>
+    </tr>
+    <tr>
+      <td>Succession planning: blocked for ~50% of L3–L4 roles</td>
+      <td>Succession planning: 64 urgent reviews surfaced with specific reasons</td>
+    </tr>
+    <tr>
+      <td>Risk: AI appears to work (it runs without errors) but decisions are wrong</td>
+      <td>Risk: Confidence scores make uncertainty explicit — the system knows what it doesn't know</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+"The most dangerous prediction is one that looks correct. Dataset A doesn't fail loudly — it fills in gaps silently and produces confident-sounding outputs from structurally broken inputs. The data layer in Dataset B doesn't just improve accuracy. It introduces the concept of uncertainty — and uncertainty, made visible, is what allows humans and AI to collaborate rather than compete."
+</blockquote>
+
+<hr class="divider">
+
+<p class="meta">End of Comparison Document &nbsp;|&nbsp; Medika Nusantara Workforce Intelligence Platform &nbsp;|&nbsp; Rakamin Product Consultant Case Study 2026</p>
+
+</body>
+</html>
