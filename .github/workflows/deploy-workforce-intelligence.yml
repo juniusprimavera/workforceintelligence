@@ -49,5 +49,6 @@ jobs:
           username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
           local-dir: artifacts/workforce-intelligence/dist/public/
-          server-dir: public_html/workforceintelligence/
+          # This Hostinger FTP account is already rooted at public_html.
+          server-dir: workforceintelligence/
           dangerous-clean-slate: false
