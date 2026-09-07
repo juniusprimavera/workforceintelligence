@@ -37,3 +37,12 @@ jobs:
               printf '%s unavailable\n' "$label"
             fi
           done
+
+          if curl --silent --show-error --fail --user "$FTP_USERNAME:$FTP_PASSWORD" \
+            "ftp://$host/.htaccess" --output root-htaccess
+          then
+            echo "root rewrite directives:"
+            grep -Ei '^[[:space:]]*(Rewrite|ErrorDocument)' root-htaccess || true
+          else
+            echo "root htaccess unavailable"
+          fi
