@@ -21,7 +21,10 @@ jobs:
           for entry in \
             'login-root:/index.html' \
             'public-html:/public_html/index.html' \
-            'domain-public-html:/domains/juniusprimavera.com/public_html/index.html'
+            'domain-public-html:/domains/juniusprimavera.com/public_html/index.html' \
+            'app-login-root:/workforceintelligence/index.html' \
+            'app-nested-public-html:/public_html/workforceintelligence/index.html' \
+            'app-domain-public-html:/domains/juniusprimavera.com/public_html/workforceintelligence/index.html'
           do
             label="${entry%%:*}"
             path="${entry#*:}"
