@@ -49,5 +49,6 @@ jobs:
           username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
           local-dir: artifacts/workforce-intelligence/dist/public/
-          server-dir: /public_html/workforceintelligence/
+          # The FTP account is chrooted to this domain's public_html directory.
+          server-dir: /workforceintelligence/
           dangerous-clean-slate: false
