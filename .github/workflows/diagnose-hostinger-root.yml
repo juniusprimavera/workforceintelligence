@@ -46,3 +46,10 @@ jobs:
           else
             echo "root htaccess unavailable"
           fi
+
+          if curl --silent --show-error --fail --user "$FTP_USERNAME:$FTP_PASSWORD" \
+            "ftp://$host/index.html" --output ftp-root-index.html
+          then
+            printf 'ftp-root-bytes '; wc -c < ftp-root-index.html
+            printf 'ftp-root-title '; grep -Eo '<title>[^<]+' ftp-root-index.html | head -1 || true
+          fi
