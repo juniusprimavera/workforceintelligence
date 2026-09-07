@@ -49,5 +49,5 @@ jobs:
           username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
           local-dir: artifacts/workforce-intelligence/dist/public/
-          server-dir: domains/juniusprimavera.com/public_html/workforceintelligence/
+          server-dir: /public_html/workforceintelligence/
           dangerous-clean-slate: false
