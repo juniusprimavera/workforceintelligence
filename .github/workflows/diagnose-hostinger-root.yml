@@ -1,0 +1,36 @@
+name: Diagnose Hostinger document root
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compare candidate document roots safely
+        env:
+          FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+        run: |
+          set +e
+          host="${FTP_SERVER#ftp://}"
+          for entry in \
+            'login-root:/index.html' \
+            'public-html:/public_html/index.html' \
+            'domain-public-html:/domains/juniusprimavera.com/public_html/index.html'
+          do
+            label="${entry%%:*}"
+            path="${entry#*:}"
+            if curl --silent --show-error --fail --user "$FTP_USERNAME:$FTP_PASSWORD" \
+              "ftp://$host$path" --output candidate-index.html
+            then
+              printf '%s ' "$label"
+              sha256sum candidate-index.html | cut -d' ' -f1
+            else
+              printf '%s unavailable\n' "$label"
+            fi
+          done
